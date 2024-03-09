@@ -6,7 +6,7 @@ import ToggleTheme from "./ToggleTheme";
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center p-3 max-w-6xl mx-auto">
+    <div className="flex justify-between items-center p-3 max-w-6xl mx-auto my-1">
       <Link href={"/"} passHref>
         <div className="flex gap-1 items-center cursor-pointer">
           <BiCameraMovie className="text-4xl font-bold bg-amber-500 rounded-lg p-1 " />

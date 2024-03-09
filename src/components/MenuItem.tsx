@@ -4,7 +4,7 @@ import { ReactElement, ElementType } from "react";
 interface MenuItemProps {
   title: string;
   address: string;
-  Icon: ElementType; // Use React.ElementType for React components
+  Icon: ElementType; 
 }
 
 export default function MenuItem({
