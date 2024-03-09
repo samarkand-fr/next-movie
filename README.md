@@ -1,5 +1,5 @@
 # IMDb Movie Watch App
-
+![IMDb Movie Watch App](./public/imbd.png)
 An application that allows users to explore movies from the IMDb database.
 
 ## Features
