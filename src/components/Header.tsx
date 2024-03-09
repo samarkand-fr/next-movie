@@ -2,6 +2,7 @@ import Link from "next/link";
 import MenuItem from "./MenuItem";
 import { AiFillHome } from "react-icons/ai";
 import { BiCameraMovie } from "react-icons/bi";
+import ToggleTheme from "./ToggleTheme";
 
 export default function Header() {
   return (
@@ -13,6 +14,7 @@ export default function Header() {
         </div>
       </Link>
       <div className="flex gap-5 ">
+        <ToggleTheme />
         <MenuItem title="home" address="/" Icon={AiFillHome} />
         <MenuItem title="about" address="/about" Icon={BiCameraMovie} />
       </div>
