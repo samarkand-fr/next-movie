@@ -24,6 +24,7 @@ const API_KEY = process.env.API_KEY;
 const Home: NextPage<HomeProps> = async({ searchParams }) => {
   const genre = searchParams.genre || 'fetchTrending';
 
+
   const endpoint =
     genre === 'fetchTopRated' ? '/movie/top_rated' : '/trending/all/week';
 

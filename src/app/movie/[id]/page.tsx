@@ -1,4 +1,3 @@
-// pages/movie/[id].tsx
 
 import { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';

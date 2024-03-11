@@ -3,40 +3,49 @@ import Link from 'next/link';
 import { FiThumbsUp } from 'react-icons/fi';
 
 interface CardProps {
-    result: {
-      id: number;
-      backdrop_path?: string;
-      poster_path?: string;
-      overview: string;
-      title?: string;
-      name?: string;
-      release_date?: string;
-      first_air_date?: string;
-      vote_count: number;
-    };
-  }
- const Card: React.FC<CardProps> = ({ result }) => {
+  result: {
+    id: number;
+    backdrop_path?: string;
+    poster_path?: string;
+    overview: string;
+    title?: string;
+    name?: string;
+    release_date?: string;
+    first_air_date?: string;
+    vote_count: number;
+  };
+}
+
+const Card: React.FC<CardProps> = ({ result }) => {
   return (
-    <div className='group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg sm:border sm:border-slate-400 sm:m-2 transition-shadow duration-200'>
+    <div className='group cursor-pointer hover:shadow-lg rounded-lg border border-gray-300 m-2 transition-shadow duration-300'>
       <Link href={`/movie/${result.id}`}>
-        <Image
-                  src={`https://image.tmdb.org/t/p/original/${result.backdrop_path || result.poster_path}`}
-                  width={500}
-                  height={300}
-                  className='sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300' alt={''}        ></Image>
-        <div className='p-2'>
-          <p className='line-clamp-2 text-md'>{result.overview}</p>
-          <h2 className='text-lg font-bold truncate'>
+        <div className='relative w-full h-48 md:h-64 overflow-hidden rounded-t-lg group-hover:opacity-75 transition-opacity duration-300'>
+          <Image
+            src={`https://image.tmdb.org/t/p/original/${result.backdrop_path || result.poster_path}`}
+            layout='fill'
+            objectFit='cover'
+            alt={''}
+          />
+        </div>
+        <div className='p-3'>
+          <p className='line-clamp-2 text-sm md:text-md'>{result.overview}</p>
+          <h2 className='text-lg md:text-xl font-bold mt-2 mb-1 truncate'>
             {result.title || result.name}
           </h2>
-          <p className='flex items-center'>
-            {result.release_date || result.first_air_date}
-            <FiThumbsUp className='h-5 mr-1 ml-3' />
-            {result.vote_count}
-          </p>
+          <div className='flex items-center text-sm md:text-md'>
+            <p className='mr-3'>
+              {result.release_date || result.first_air_date}
+            </p>
+            <div className='flex items-center'>
+              <FiThumbsUp className='h-5 mr-1' />
+              <span>{result.vote_count}</span>
+            </div>
+          </div>
         </div>
       </Link>
     </div>
   );
- }
-export default Card
+};
+
+export default Card;

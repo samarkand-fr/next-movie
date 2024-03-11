@@ -32,6 +32,7 @@ An application that allows users to explore movies from the IMDb database.
    - Open http://localhost:3000 in your browser.
 
 ## Usage
-Navigate through the app to explore popular movies and search for specific movies using the search box.
-Click on a movie to view detailed information.
-Toggle between light and dark mode using the theme switcher.
+- Navigate through the app to explore popular movies 
+- Search for specific movies using the search box.
+- Click on a movie to view detailed information.
+- Toggle between light and dark mode using the theme switcher.
