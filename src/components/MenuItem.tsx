@@ -1,17 +1,13 @@
 import Link from "next/link";
-import { ReactElement, ElementType } from "react";
+import {ElementType}  from "react";
 
 interface MenuItemProps {
   title: string;
   address: string;
-  Icon: ElementType; 
+  Icon: ElementType;
 }
 
-export default function MenuItem({
-  title,
-  address,
-  Icon,
-}: MenuItemProps): ReactElement {
+const MenuItem: React.FC<MenuItemProps> = ({ title, address, Icon }) => {
   return (
     <Link href={address} passHref>
       <div className="hover:text-amber-500">
@@ -22,4 +18,6 @@ export default function MenuItem({
       </div>
     </Link>
   );
-}
+};
+
+export default MenuItem;

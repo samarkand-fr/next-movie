@@ -4,7 +4,7 @@ import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export default function ToggleTheme() {
+const ToggleTheme: React.FC = () => {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const currentTheme = theme === 'system' ? systemTheme : theme;
@@ -27,4 +27,6 @@ export default function ToggleTheme() {
         ))}
     </div>
   );
-}
+};
+
+export default ToggleTheme;

@@ -1,20 +1,45 @@
 import Results from '@/components/MoviesList';
-interface SearchPageParams{
-  params: any;
+
+interface SearchPageParams {
+  params: { searchTerm?: string };
 }
-export default async function SearchPage({ params }:SearchPageParams) {
-  const seachTerm = params.searchTerm;
-  const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${seachTerm}&language=en-US&page=1&include_adult=false`
-  );
-  const data = await res.json();
-  const results = data.results;
+
+const SearchPage: React.FC<SearchPageParams> = ({ params }) => {
+  const searchTerm = params?.searchTerm || '';
+  const apiKey = process.env.API_KEY;
+  const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchTerm}&language=en-US&page=1&include_adult=false`;
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch(apiUrl);
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+
+      const data = await res.json();
+      const results = data.results;
+
+      return results;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return [];
+    }
+  };
+
   return (
     <div>
-      {results &&
-        results.length ===
-        <h1 className='text-center pt-6'>No results found</h1>}
-      {results && <Results results={results} />}
+      {fetchData().then((results) => (
+        <>
+          {results && results.length === 0 ? (
+            <h1 className="text-center pt-6">No results found</h1>
+          ) : (
+            <Results results={results} />
+          )}
+        </>
+      ))}
     </div>
   );
-}
+};
+
+export default SearchPage;

@@ -4,7 +4,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BiCameraMovie } from "react-icons/bi";
 import ToggleTheme from "./ToggleTheme";
 
-export default function Header() {
+const Header:React.FC  = () => {
   return (
     <div className="flex justify-between items-center p-3 max-w-6xl mx-auto my-1">
       <Link href={"/"} passHref>
@@ -20,4 +20,6 @@ export default function Header() {
       </div>
     </div>
   );
-}
+};
+
+export default Header;

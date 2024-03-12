@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import Results from '../components/MoviesList';
+import Loading from '@/components/Loading';
 
 interface ResultItem {
   id: number;
@@ -21,12 +22,13 @@ interface HomeProps {
 
 const API_KEY = process.env.API_KEY;
 
-const Home: NextPage<HomeProps> = async({ searchParams }) => {
+const Home: NextPage<HomeProps> = async ({ searchParams }) => {
   const genre = searchParams.genre || 'fetchTrending';
-
-
   const endpoint =
     genre === 'fetchTopRated' ? '/movie/top_rated' : '/trending/all/week';
+
+  let isLoading = true;
+  let results: ResultItem[] = [];
 
   try {
     const res = await fetch(
@@ -38,17 +40,25 @@ const Home: NextPage<HomeProps> = async({ searchParams }) => {
     }
 
     const data = await res.json();
-    const results: ResultItem[] = data.results;
-
-    return (
-      <div>
-        <Results results={results} />
-      </div>
-    );
+    results = data.results;
+    isLoading = false;
   } catch (error) {
     console.error('Error fetching data:', error);
-    return <div>Error fetching data</div>;
   }
+
+  return (
+    <div>
+      {isLoading ? (
+        <div className="flex justify-center mt-16">
+          <Loading />
+        </div>
+      )
+        : (
+        <Results results={results} />
+        )
+      }
+    </div>
+  );
 };
 
 export default Home;
