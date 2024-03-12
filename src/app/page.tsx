@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Results from '../components/MoviesList';
-import Loading from '@/components/Loading';
+import Loading from '@/components/Loading';  // Import the Loading component
 
 interface ResultItem {
   id: number;
@@ -22,6 +22,7 @@ interface HomeProps {
 
 const API_KEY = process.env.API_KEY;
 
+// Define the Home component as a NextPage
 const Home: NextPage<HomeProps> = async ({ searchParams }) => {
   const genre = searchParams.genre || 'fetchTrending';
   const endpoint =
@@ -31,32 +32,35 @@ const Home: NextPage<HomeProps> = async ({ searchParams }) => {
   let results: ResultItem[] = [];
 
   try {
+    // Fetch data from the API
     const res = await fetch(
       `https://api.themoviedb.org/3${endpoint}?api_key=${API_KEY}&language=en-US&page=1`
     );
 
+    // Check if the response is successful
     if (!res.ok) {
       throw new Error('Failed to fetch data');
     }
 
+    // Parse the response as JSON
     const data = await res.json();
     results = data.results;
     isLoading = false;
   } catch (error) {
+    // Handle errors and log them
     console.error('Error fetching data:', error);
   }
 
   return (
     <div>
+      {/* Conditionally render Loading component or Results component based on the loading state */}
       {isLoading ? (
         <div className="flex justify-center mt-16">
           <Loading />
         </div>
-      )
-        : (
+      ) : (
         <Results results={results} />
-        )
-      }
+      )}
     </div>
   );
 };

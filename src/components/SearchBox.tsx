@@ -3,19 +3,27 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// SearchBox component for handling user search input
 export default function SearchBox() {
+  // State to manage the search input value
   const [search, setSearch] = useState("");
+  // Next.js router for handling navigation
   const router = useRouter();
+
+  // Function to handle form submission
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    // Navigate to the search results page with the entered search term
     router.push(`/search/${search}`);
   };
   
+  // Render the search input form
   return (
     <form
       className="flex justify-between px-5 max-w-6xl mx-auto"
       onSubmit={handleSubmit}
     >
+      {/* Search input field */}
       <input
         type="text"
         placeholder="Search keywords..."
@@ -23,6 +31,7 @@ export default function SearchBox() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      {/* Submit button */}
       <button
         className="text-amber-600 disabled:text-gray-600 dark:disabled:text-gray-300 " 
         disabled={search === ""}
